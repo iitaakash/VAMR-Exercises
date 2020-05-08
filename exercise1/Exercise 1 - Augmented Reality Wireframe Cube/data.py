@@ -31,6 +31,7 @@ def ReadImage(path = "data/images_undistorted/img_0001.jpg"):
 
 # only works for this dataset
 def ReadImages(path = "data/images/", suf = ".jpg"):
+    print("Loading image data")
     image_count = len(glob.glob(path + "*" + suf))
     images = []
     for i in range(image_count):
@@ -38,5 +39,6 @@ def ReadImages(path = "data/images/", suf = ".jpg"):
         img = ReadImage(image_path)
         images.append(img)
     images = np.array(images)
+    print("Loaded data")
     return images
 
