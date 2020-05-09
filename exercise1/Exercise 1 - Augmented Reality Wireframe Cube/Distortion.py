@@ -27,7 +27,7 @@ class Distortion:
         self.tot_size =  self.height * self.width 
     
 
-    # shaving off 5 ms with this precomputation of params.
+    # shaving off 70 ms with this precomputation of params.
     def InitDistortionMap(self):
         print("Building distortion map")
         start = time.time()
@@ -56,7 +56,7 @@ class Distortion:
         self.ab = a * b
         self.mul_vals = np.vstack((self.mamb, self.amb, self.ab, self.mab))
         end = time.time() - start
-        print("Building distortion map took : {:0.2f} ".format(end))
+        print("Building distortion map took : {:0.3f}s ".format(end))
 
     
 
