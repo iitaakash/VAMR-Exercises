@@ -1,6 +1,7 @@
 import numpy as np 
 import glob
 import cv2
+import time
 
 
 def ReadK(path = "data/K.txt"):
@@ -32,6 +33,7 @@ def ReadImage(path = "data/images_undistorted/img_0001.jpg"):
 # only works for this dataset
 def ReadImages(path = "data/images/", suf = ".jpg"):
     print("Loading image data")
+    start = time.time()
     image_count = len(glob.glob(path + "*" + suf))
     images = []
     for i in range(image_count):
@@ -39,6 +41,7 @@ def ReadImages(path = "data/images/", suf = ".jpg"):
         img = ReadImage(image_path)
         images.append(img)
     images = np.array(images)
-    print("Loaded data")
+    end = time.time() - start 
+    print("Loading image data took : {:0.2f} ".format(end))
     return images
 
