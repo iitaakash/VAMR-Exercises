@@ -6,9 +6,12 @@ Stereo::Stereo(const cv::Mat& K,const float& patch_radius,const float& baseline,
       min_disp_(min_disp), max_disp_(max_disp) {
         patch_size_ = 2*patch_radius_ + 1;
         patch_count_ = patch_size_ * patch_size_;
+        points_ = new Points();
       }
 
-Stereo::~Stereo() {}
+Stereo::~Stereo() {
+  delete points_;
+}
 
 cv::Mat Stereo::GetDisparity(const cv::Mat& left_img,
                             const cv::Mat& right_img) {
@@ -41,17 +44,34 @@ cv::Mat Stereo::GetDisparity(const cv::Mat& left_img,
       tot_time += t.TimeElapsed();
 
       // find min score for disparray
-      float score_min = std::numeric_limits<float>::max();
+      float score1 = std::numeric_limits<float>::max();
       int disp_min = 0;
+      float score2 = score1;
+      float score3 = score1;
       for (int i = 0; i < disp_array.size(); i++)
       {
-          if (disp_array[i].score < score_min){
-              score_min = disp_array[i].score;
-              disp_min = disp_array[i].disparity;
+          if (disp_array[i].score < score1){
+            score3 = score2;
+            score2 = score1;
+            score1 = disp_array[i].score;
+            disp_min = disp_array[i].disparity;
+          }else if(disp_array[i].score < score2){
+            score3 = score2;
+            score2 = disp_array[i].score;
+          }else if(disp_array[i].score < score3){
+            score3 = disp_array[i].score;
           }
       }
 
-      // assign index to out image
+      // outlier rejection
+      float thresh = 1.2247449;
+      if (score2 <= thresh*score1 && score3 <= thresh*score1){
+        continue;
+      }
+      if(disp_min <= min_disp_ || disp_min >= max_disp_){
+        continue;
+      }
+      
       out.at<uchar>(j,i) = disp_min * 5;
 
     }
@@ -70,7 +90,7 @@ inline std::vector<SSD> Stereo::GetDispArray(const cv::Mat& left_patch,
   int end_index = std::max(patch_radius_, index - min_disp_);
 
   // to be deleted!
-  // cv::Mat right_crop_patch = cv::Mat::zeros(patch_size_, patch_size_, CV_32F); 
+  // cv::Mat right_crop_patch = cv::Mat::zeros(patch_size_, patch_size_, CV_32F);
 
   for (int i = start_index ; i <= end_index; i++)
   {
@@ -102,4 +122,18 @@ inline float Stereo::Ssd(const cv::Mat &im1, const cv::Mat &im2){
     //   }
     // }
     return score;
+}
+
+
+Points* Stereo::GetPointCloud(const cv::Mat& left_image, const cv::Mat& disparity){
+    
+    for (int i = 0; i < left_image.rows; i++)
+    {
+      for (int j = 0; j < left_image.cols; j++)
+      {
+        
+      }
+      
+    }
+    
 }

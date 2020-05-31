@@ -4,6 +4,7 @@
 #include <string>
 #include "Timer.hpp"
 #include "Stereo.hpp"
+#include "Points.hpp"
 
 
 int main(int argc, const char* argv[])
@@ -30,6 +31,7 @@ int main(int argc, const char* argv[])
         ss << std::setw(6) << std::setfill('0') << i << ".png";
         std::string left_path = "../data/left/" + ss.str();
         std::string right_path = "../data/right/" + ss.str();
+        std::cout << "Frame : " << i << std::endl;
         cv::Mat left_img = cv::imread(left_path, 0);
         cv::resize(left_img, left_img, cv::Size(), scale, scale);
         
@@ -40,11 +42,13 @@ int main(int argc, const char* argv[])
         cv::Mat img = stereo->GetDisparity(left_img, right_img);
         std::cout << t.TimeElapsed() << std::endl;
 
+        // cv::imshow("left_image", left_img);
         cv::imshow("disparity", img);
-        int k = cv::waitKey(1);
+        int k = cv::waitKey(0);
         if (k == 32){
             break;
         }
+        break;
     }
 
     return 0;

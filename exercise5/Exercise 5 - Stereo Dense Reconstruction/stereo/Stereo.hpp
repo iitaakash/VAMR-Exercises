@@ -5,6 +5,7 @@
 #include <opencv2/opencv.hpp>
 #include <vector>
 #include "Timer.hpp"
+#include "Points.hpp"
 
 
 struct SSD{
@@ -20,6 +21,8 @@ public:
 
   cv::Mat GetDisparity(const cv::Mat& left_image, const cv::Mat& right_image);
 
+  Points* GetPointCloud(const cv::Mat& left_image, const cv::Mat& disparity);
+
 private:
 
     inline std::vector<SSD> GetDispArray(const cv::Mat& left_patch, const cv::Mat& right_patch,const int& index);
@@ -27,6 +30,7 @@ private:
     inline float Ssd(const cv::Mat &im1, const cv::Mat &im2);
 
     cv::Mat k_;
+    Points* points_;
     float patch_radius_;
     float baseline_;
     float min_disp_;
