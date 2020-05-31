@@ -47,6 +47,18 @@
         "typeinfo": "cpp",
         "chrono": "cpp",
         "ctime": "cpp",
-        "ratio": "cpp"
+        "ratio": "cpp",
+        "cstring": "cpp",
+        "strstream": "cpp",
+        "bitset": "cpp",
+        "condition_variable": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "iomanip": "cpp",
+        "mutex": "cpp",
+        "thread": "cpp",
+        "cfenv": "cpp",
+        "cinttypes": "cpp"
     }
 }
