@@ -2,6 +2,8 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <cmath>
+#include <Eigen/Dense>
 #include "Timer.hpp"
 #include "Stereo.hpp"
 #include "Points.hpp"
@@ -10,11 +12,15 @@
 int main(int argc, const char* argv[])
 {
     float scale = 0.5;
-    float kmat[] = {7.188560000000e+02, 0, 6.071928000000e+02, 
-                    0, 7.188560000000e+02, 1.852157000000e+02,
-                    0, 0, 1};
+    // float kmat[] = {7.188560000000e+02, 0, 6.071928000000e+02, 
+    //                 0, 7.188560000000e+02, 1.852157000000e+02,
+    //                 0, 0, 1};
 
-    cv::Mat K(3,3, CV_32F, kmat);
+    Eigen::Matrix3f K;
+
+    K << 7.188560000000e+02, 0, 6.071928000000e+02, 
+        0, 7.188560000000e+02, 1.852157000000e+02,
+        0, 0, 1;
 
     float baseline = 0.54;
     float patch_radius = 5;
@@ -26,7 +32,7 @@ int main(int argc, const char* argv[])
     cv::namedWindow("disparity",cv::WINDOW_KEEPRATIO);
 
 
-    for (int i = 0 ; i <= 99 ; i++){
+    for (int i = 1 ; i <= 99 ; i++){
         std::stringstream ss;
         ss << std::setw(6) << std::setfill('0') << i << ".png";
         std::string left_path = "../data/left/" + ss.str();
@@ -39,15 +45,18 @@ int main(int argc, const char* argv[])
         cv::resize(right_img, right_img, cv::Size(), scale, scale);
 
         Timer t;
-        cv::Mat img = stereo->GetDisparity(left_img, right_img);
+        cv::Mat disp_img = stereo->GetDisparity(left_img, right_img);
         std::cout << t.TimeElapsed() << std::endl;
 
         // cv::imshow("left_image", left_img);
-        cv::imshow("disparity", img);
+        cv::imshow("disparity", 5*disp_img);
         int k = cv::waitKey(0);
         if (k == 32){
             break;
         }
+
+        Points* p1 = stereo->GetPointCloud(left_img, disp_img);
+        p1->Save("my_points.ply");
         break;
     }
 

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <vector>
+#include <Eigen/Dense>
 #include "Timer.hpp"
 #include "Points.hpp"
 
@@ -16,7 +17,7 @@ struct SSD{
 
 class Stereo {
 public:
-  Stereo(const cv::Mat& K, const float& patch_radius,const float& baseline,const float& min_disp,const float& max_disp);
+  Stereo(const Eigen::Matrix3f& K, const float& patch_radius,const float& baseline,const float& min_disp,const float& max_disp);
   ~Stereo();
 
   cv::Mat GetDisparity(const cv::Mat& left_image, const cv::Mat& right_image);
@@ -29,7 +30,8 @@ private:
 
     inline float Ssd(const cv::Mat &im1, const cv::Mat &im2);
 
-    cv::Mat k_;
+    Eigen::Matrix3f k_;
+    Eigen::Matrix3f kinv_;
     Points* points_;
     float patch_radius_;
     float baseline_;

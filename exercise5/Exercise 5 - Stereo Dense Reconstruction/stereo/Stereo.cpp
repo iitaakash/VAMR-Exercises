@@ -1,11 +1,12 @@
 #include "Stereo.hpp"
 
-Stereo::Stereo(const cv::Mat& K,const float& patch_radius,const float& baseline,const float& min_disp,
+Stereo::Stereo(const Eigen::Matrix3f& K,const float& patch_radius,const float& baseline,const float& min_disp,
               const float& max_disp)
     : k_(K), patch_radius_(patch_radius), baseline_(baseline),
       min_disp_(min_disp), max_disp_(max_disp) {
         patch_size_ = 2*patch_radius_ + 1;
         patch_count_ = patch_size_ * patch_size_;
+        kinv_ = k_.inverse();
         points_ = new Points();
       }
 
@@ -46,6 +47,7 @@ cv::Mat Stereo::GetDisparity(const cv::Mat& left_img,
       // find min score for disparray
       float score1 = std::numeric_limits<float>::max();
       int disp_min = 0;
+      int index_ssd = 0;;
       float score2 = score1;
       float score3 = score1;
       for (int i = 0; i < disp_array.size(); i++)
@@ -55,6 +57,7 @@ cv::Mat Stereo::GetDisparity(const cv::Mat& left_img,
             score2 = score1;
             score1 = disp_array[i].score;
             disp_min = disp_array[i].disparity;
+            index_ssd = i;
           }else if(disp_array[i].score < score2){
             score3 = score2;
             score2 = disp_array[i].score;
@@ -71,8 +74,16 @@ cv::Mat Stereo::GetDisparity(const cv::Mat& left_img,
       if(disp_min <= min_disp_ || disp_min >= max_disp_){
         continue;
       }
-      
-      out.at<uchar>(j,i) = disp_min * 5;
+      if (index_ssd == 0 || index_ssd == disp_array.size() - 1){
+        continue;
+      }
+
+      std::vector<float> X = {disp_array[index_ssd-1].disparity, disp_array[index_ssd].disparity, disp_array[index_ssd+1].disparity};
+      std::vector<float> Y = {disp_array[index_ssd-1].score, disp_array[index_ssd].score, disp_array[index_ssd+1].score};
+
+      // to do : fit a 2nd order polynomial and find disparity.
+
+      out.at<uchar>(j,i) = disp_min;
 
     }
   }
@@ -131,9 +142,16 @@ Points* Stereo::GetPointCloud(const cv::Mat& left_image, const cv::Mat& disparit
     {
       for (int j = 0; j < left_image.cols; j++)
       {
-        
+        float disp = disparity.at<uchar>(i,j);
+
+        if (disp >= min_disp_){
+            float depth = (baseline_ * k_(0,0))/disp;
+            Eigen::Vector3f pt3d = depth * kinv_ * Eigen::Vector3f(j,i,1.0);
+            points_->AddPoint(Point(pt3d(0),pt3d(1),pt3d(2),left_image.at<uchar>(i,j)));
+        }
       }
       
     }
+    return points_;
     
 }
