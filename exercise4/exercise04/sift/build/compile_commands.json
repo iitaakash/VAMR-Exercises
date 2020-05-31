@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/Users/aakash/Desktop/sift/build",
+  "command": "/usr/bin/clang++   -isystem /usr/local/Cellar/opencv@3/3.4.10/include -isystem /usr/local/Cellar/opencv@3/3.4.10/include/opencv  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu++11 -o CMakeFiles/main.dir/main.cpp.o -c /Users/aakash/Desktop/sift/main.cpp",
+  "file": "/Users/aakash/Desktop/sift/main.cpp"
+},
+{
+  "directory": "/Users/aakash/Desktop/sift/build",
+  "command": "/usr/bin/clang++   -isystem /usr/local/Cellar/opencv@3/3.4.10/include -isystem /usr/local/Cellar/opencv@3/3.4.10/include/opencv  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu++11 -o CMakeFiles/main.dir/Sift.cpp.o -c /Users/aakash/Desktop/sift/Sift.cpp",
+  "file": "/Users/aakash/Desktop/sift/Sift.cpp"
+}
+]
