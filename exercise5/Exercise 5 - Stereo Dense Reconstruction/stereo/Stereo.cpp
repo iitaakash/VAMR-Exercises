@@ -25,7 +25,7 @@ cv::Mat Stereo::GetDisparity(const cv::Mat& left_img,
   right_img.convertTo(right_image, CV_32F);
 
   // 620 188
-  cv::Mat out = cv::Mat::zeros(left_image.rows, left_image.cols, CV_8UC1);
+  cv::Mat out = cv::Mat::zeros(left_image.rows, left_image.cols, CV_32FC1);
 
   // // to be deleted!
   // cv::Mat right_patch = cv::Mat::zeros(patch_size_, left_image.cols, CV_32F); 
@@ -78,12 +78,15 @@ cv::Mat Stereo::GetDisparity(const cv::Mat& left_img,
         continue;
       }
 
-      std::vector<float> X = {disp_array[index_ssd-1].disparity, disp_array[index_ssd].disparity, disp_array[index_ssd+1].disparity};
+      std::vector<float> X = {float(disp_array[index_ssd-1].disparity), float(disp_array[index_ssd].disparity), float(disp_array[index_ssd+1].disparity)};
       std::vector<float> Y = {disp_array[index_ssd-1].score, disp_array[index_ssd].score, disp_array[index_ssd+1].score};
 
-      // to do : fit a 2nd order polynomial and find disparity.
 
-      out.at<uchar>(j,i) = disp_min;
+      float d = SubDisparity(X,Y);
+
+      // std::cout << d  << " and " << disp_min << std::endl;
+
+      out.at<float>(j,i) = d;
 
     }
   }
@@ -142,7 +145,7 @@ Points* Stereo::GetPointCloud(const cv::Mat& left_image, const cv::Mat& disparit
     {
       for (int j = 0; j < left_image.cols; j++)
       {
-        float disp = disparity.at<uchar>(i,j);
+        float disp = disparity.at<float>(i,j);
 
         if (disp >= min_disp_){
             float depth = (baseline_ * k_(0,0))/disp;
@@ -155,3 +158,15 @@ Points* Stereo::GetPointCloud(const cv::Mat& left_image, const cv::Mat& disparit
     return points_;
     
 }
+
+float Stereo::SubDisparity(const std::vector<float>& x, const std::vector<float>& y){
+    Eigen::Matrix3f a;
+    a << x[0]*x[0], x[0], 1,
+         x[1]*x[1], x[1], 1,
+         x[2]*x[2], x[2], 1; 
+    Eigen::Vector3f coeff = a.inverse() * Eigen::Vector3f(y[0], y[1], y[2]);
+
+    return -1 * (coeff[1]/(2 * coeff[0]));
+}
+
+

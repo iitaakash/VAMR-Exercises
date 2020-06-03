@@ -30,6 +30,9 @@ private:
 
     inline float Ssd(const cv::Mat &im1, const cv::Mat &im2);
 
+    float SubDisparity(const std::vector<float>& x, const std::vector<float>& y);
+    
+
     Eigen::Matrix3f k_;
     Eigen::Matrix3f kinv_;
     Points* points_;
