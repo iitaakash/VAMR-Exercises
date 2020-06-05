@@ -60,5 +60,6 @@
         "thread": "cpp",
         "cfenv": "cpp",
         "cinttypes": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "${workspaceFolder}/exercise6/Exercise 6 - Two-view Geometry/triangulation"
 }

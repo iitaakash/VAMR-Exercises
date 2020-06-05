@@ -11,7 +11,8 @@
             "cStandard": "c11",
             "cppStandard": "gnu++14",
             "intelliSenseMode": "clang-x64",
-            "compileCommands": "${workspaceFolder}/exercise4/exercise04/sift/build/compile_commands.json"
+            "compileCommands": "${workspaceFolder}/exercise4/exercise04/sift/build/compile_commands.json",
+            "configurationProvider": "ms-vscode.cmake-tools"
         }
     ],
     "version": 4
