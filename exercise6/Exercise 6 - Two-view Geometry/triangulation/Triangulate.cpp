@@ -86,23 +86,29 @@ void DecomposeRT(const Eigen::Matrix3f &E, Eigen::Matrix3f &R, Eigen::Vector3f &
 Eigen::Matrix3f EstimateFMatrix(const std::vector<Eigen::Vector3f> &p1, const std::vector<Eigen::Vector3f> &p2)
 {
     const int num_points = p1.size();
-    Eigen::Matrix<float, Eigen::Dynamic, 9> Q(num_points,9);
+    Eigen::MatrixXf Q(num_points,9);
     for (int i = 0; i < num_points; i++)
     {
-        Q.row(i) << p2[i](0) * p1[i](0), p2[i](0) * p1[i](1), 
-                    p2[i](0), p2[i](1) * p1[i](0), p2[i](1) * p1[i](1),
-                    p2[i](1), p1[i](0), p1[i](1), 1;
+        float x1 = p1[i](0);
+        float y1 = p1[i](1);
+        float z1 = p1[i](2);
+        float x2 = p2[i](0);
+        float y2 = p2[i](1);
+        float z2 = p2[i](2);
+        
+        Q.row(i) << x2 * x1, x2 * y1, x2 * z1,
+                    y2 * x1, y2 * y1, y2 * z1, 
+                    z2 * x1, z2 * y1, z2 * z1;
         
     }
     // SVD of Q
-    Eigen::JacobiSVD<Eigen::Matrix<float, Eigen::Dynamic, 9>> svd(Q, Eigen::ComputeFullV | Eigen::ComputeFullU);
+    Eigen::JacobiSVD<Eigen::MatrixXf> svd(Q, Eigen::ComputeThinV | Eigen::ComputeThinU);
 
     // column corresponding to smallest eigen value
     Eigen::Matrix<float, 9, 1> Farray = svd.matrixV().col(8);
     // std::cout << Farray << std::endl;
 
     Eigen::Map<Eigen::Matrix3f> F1(Farray.data());
-    // std::cout << F << std::endl;
 
     Eigen::JacobiSVD<Eigen::Matrix3f> svd1(F1, Eigen::ComputeFullV | Eigen::ComputeFullU);
 
@@ -113,4 +119,23 @@ Eigen::Matrix3f EstimateFMatrix(const std::vector<Eigen::Vector3f> &p1, const st
     std::cout << F << std::endl;
 
     return F;
+}
+
+
+float DistPoint2EpipolarLine(const Eigen::Matrix3f& F, const std::vector<Eigen::Vector3f>& p1, const std::vector<Eigen::Vector3f>& p2){
+    float score = 0.0;
+    float num_pts = p1.size();
+    for (size_t i = 0; i < num_pts; i++)
+    {
+        Eigen::Vector3f epi1 = F.transpose() * p2[i];
+        Eigen::Vector3f epi2 = F * p1[i];
+
+        float deno1 = epi1(0) * epi1(0) + epi1(1) * epi1(1);
+        float deno2 = epi2(0) * epi2(0) + epi2(1) * epi2(1);
+
+        score += (((epi1.transpose() * p1[i])(0) * (epi1.transpose() * p1[i])(0)) / deno1) + (((epi2.transpose() * p2[i])(0) * (epi2.transpose() * p2[i])(0)) / deno2);
+    }
+
+    score = score / num_pts;
+    return std::sqrt(score);
 }

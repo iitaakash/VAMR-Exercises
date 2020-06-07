@@ -1,4 +1,4 @@
-function cost = distPoint2EpipolarLine(F,p1,p2)
+function cost = (F,p1,p2)
 % distPoint2EpipolarLine  Compute the point-to-epipolar-line distance
 %
 %   Input:

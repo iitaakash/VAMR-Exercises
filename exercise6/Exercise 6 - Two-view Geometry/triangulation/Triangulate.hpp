@@ -30,4 +30,7 @@ void DecomposeRT(const Eigen::Matrix3f& E, Eigen::Matrix3f& R, Eigen::Vector3f& 
 
 Eigen::Matrix3f EstimateFMatrix(const std::vector<Eigen::Vector3f>& p1, const std::vector<Eigen::Vector3f>& p2);
 
+float DistPoint2EpipolarLine(const Eigen::Matrix3f& F, const std::vector<Eigen::Vector3f>& p1, const std::vector<Eigen::Vector3f>& p2);
+
+
 #endif // !TRIANGULATE_HPP
