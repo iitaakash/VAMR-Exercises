@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/main.dir/Sift.cpp.o"
   "CMakeFiles/main.dir/main.cpp.o"
-  "main"
+  "CMakeFiles/main.dir/Sift.cpp.o"
   "main.pdb"
+  "main"
 )
 
 # Per-language clean rules from dependency scanning.
