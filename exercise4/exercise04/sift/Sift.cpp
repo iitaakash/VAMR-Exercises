@@ -13,6 +13,8 @@ void Sift::Detect(const cv::Mat &input, std::vector<cv::KeyPoint> &keypoints){
     cv::Mat output;
     input.convertTo(output, CV_32F);
 
+    image_ = input.clone();
+
     output = output / 255.0;
 
     // compute image pyramids
@@ -86,61 +88,17 @@ void Sift::DetectAndCompute(const cv::Mat &input, std::vector<cv::KeyPoint> &key
 
     // compute descriptor
     int nkp = kpts_.size();
-    descriptors = cv::Mat::zeros(cv::Size(128, nkp), CV_8U);
+    std::vector<std::array<int, 128>> out;
 
     // for all keypoints
     for (int i = 0; i < nkp; i++)
     {
        KPoint kp = kpts_[i];
        cv::Mat blur_img = blurred_images_[kp.oct][kp.blur_no];
-
-       if(kp.x - 7 < 0 || kp.x + 9 >= blur_img.cols || kp.y - 7 < 0 || kp.y + 9 >= blur_img.rows){
-           continue;
-       }
-
-       cv::Mat des = ComputeDescriptor(blur_img, kp);
-       descriptors.row(i) = des.clone(); 
+       std::array<int, 128> des = GenerateDescriptor(blur_img, kp.y, kp.x);
+       out.emplace_back(des);
     }
-    
-}
-
-cv::Mat Sift::ComputeDescriptor(const cv::Mat& image, const KPoint& kp){
-
-    cv::Mat dx, dy;
-    cv::Sobel(image, dx, CV_32F, 1,0);
-    cv::Sobel(image, dy, CV_32F, 0,1);
-
-    cv::Mat ang, mag;
-    cv::cartToPolar(dx, dy, mag, ang);
-
-    std::cout << mag(cv::Range(kp.y - 7,  kp.y + 9), cv::Range(kp.x - 7,  kp.x + 9)).size()<< std::endl;
-
-    cv::Mat patch_mag = mag(cv::Range(kp.y - 7,  kp.y + 9), cv::Range(kp.x - 7,  kp.x + 9));
-    cv::Mat patch_ang = ang(cv::Range(kp.y - 7,  kp.y + 9), cv::Range(kp.x - 7,  kp.x + 9));
-    
-    return GenerateDescriptor(patch_mag, patch_ang);
-
-    return cv::Mat::ones(cv::Size(128,1), CV_8U);
-}
-
-float normal(float mu, float sig, float x){
-    const float pi = 3.14159265358;
-    return (1.0 / std::sqrt(2 * pi * sig)) * std::exp(-1 * (std::pow(x - mu ,2) / (2 * std::pow(sig,2)) ));
-}
-
-cv::Mat Sift::GenerateDescriptor(const cv::Mat& mag, const cv::Mat& ang){
-    cv::Mat mag_scale = mag.clone();
-    for (size_t i = 0; i < mag.cols; i++)
-    {
-        for (size_t j = 0; i < mag.rows; i++)
-        {
-            float distance = std::sqrt((j - 8.0) * (j - 8.0) + (i - 8.0) * (i - 8.0));
-            float gauss = normal(0, 24.0, distance);
-            mag_scale.at<float>(j,i) = mag_scale.at<float>(j,i) * gauss;
-        }
-        
-    }
-    
+    descriptors = ToCVDesMat<int>(out);
 }
 
 

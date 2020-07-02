@@ -18,7 +18,7 @@
 					]
 				}
 			],
-			"name" : "Debug",
+			"name" : "",
 			"projects" : 
 			[
 				{
@@ -38,7 +38,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "main::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-main-Debug-b31fa2b938d7c9ab154c.json",
+					"jsonFile" : "target-main-52b04f027ee8d735e925.json",
 					"name" : "main",
 					"projectIndex" : 0
 				}
@@ -48,8 +48,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/aakash/Desktop/sift/build",
-		"source" : "/Users/aakash/Desktop/sift"
+		"build" : "/Users/aakash/Desktop/VAMR-Exercises/exercise4/exercise04/sift/build",
+		"source" : "/Users/aakash/Desktop/VAMR-Exercises/exercise4/exercise04/sift"
 	},
 	"version" : 
 	{

@@ -4,6 +4,9 @@
 #include <opencv2/opencv.hpp>
 #include <vector>
 #include <iostream>
+#include <array>
+
+#include "Utils.hpp"
 
 
 struct KPoint{
@@ -39,8 +42,6 @@ class Sift {
         void ComputeImagePyramids(const cv::Mat& image);
         void ComputeBlurredImages();
         void ComputeDOGVoxels();
-        cv::Mat ComputeDescriptor(const cv::Mat& image, const KPoint& kp); 
-        cv::Mat GenerateDescriptor(const cv::Mat& mag, const cv::Mat& ang);
 
         int octave_;
         int scale_;
@@ -50,6 +51,7 @@ class Sift {
         std::vector<std::vector<cv::Mat>> blurred_images_;
         std::vector<cv::Mat> pyramid_;
         std::vector<KPoint> kpts_;
+        cv::Mat image_;
 };
 
 #endif // !SIFT_HPP
