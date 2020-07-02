@@ -37,7 +37,7 @@ int main(int argc, const char* argv[])
     std::vector< std::vector<cv::DMatch> > knn_matches;
     matcher->knnMatch( des1, des2, knn_matches, 2 );
     //-- Filter matches using the Lowe's ratio test
-    const float ratio_thresh = 0.8f;
+    const float ratio_thresh = 0.7f;
     std::vector<cv::DMatch> good_matches;
     for (size_t i = 0; i < knn_matches.size(); i++)
     {

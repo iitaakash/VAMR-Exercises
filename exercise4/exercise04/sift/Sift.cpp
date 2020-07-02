@@ -94,7 +94,7 @@ void Sift::DetectAndCompute(const cv::Mat &input, std::vector<cv::KeyPoint> &key
     for (int i = 0; i < nkp; i++)
     {
        KPoint kp = kpts_[i];
-       cv::Mat blur_img = blurred_images_[kp.oct][kp.blur_no];
+       cv::Mat blur_img = blurred_images_[kp.oct][kp.blur_no].clone();
        std::array<int, 128> des = GenerateDescriptor(blur_img, kp.y, kp.x);
        out.emplace_back(des);
     }

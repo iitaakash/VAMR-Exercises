@@ -6,19 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/aakash/Desktop/VAMR-Exercises/exercise4/exercise04/sift/Sift.cpp
-Sift.hpp
-/Users/aakash/Desktop/VAMR-Exercises/exercise4/exercise04/sift/Sift.hpp
-
-/Users/aakash/Desktop/VAMR-Exercises/exercise4/exercise04/sift/Sift.hpp
-opencv2/opencv.hpp
--
-vector
--
-iostream
--
-array
--
+/Users/aakash/Desktop/VAMR-Exercises/exercise4/exercise04/sift/Utils.cpp
 Utils.hpp
 /Users/aakash/Desktop/VAMR-Exercises/exercise4/exercise04/sift/Utils.hpp
 
