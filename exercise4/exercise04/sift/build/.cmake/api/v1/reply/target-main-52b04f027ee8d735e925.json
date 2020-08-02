@@ -1,0 +1,355 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "main"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"target_link_libraries"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 5,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 6,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : " -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk  "
+				},
+				{
+					"fragment" : "-std=gnu++11"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/usr/local/Cellar/opencv@3/3.4.10/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/usr/local/Cellar/opencv@3/3.4.10/include/opencv"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2
+			]
+		}
+	],
+	"id" : "main::@6890427a1f51a3e7e1df",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/usr/local/lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_stitching.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_superres.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_videostab.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_aruco.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_bgsegm.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_bioinspired.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_ccalib.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_dnn_objdetect.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_dpm.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_face.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_freetype.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_fuzzy.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_hfs.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_img_hash.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_line_descriptor.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_optflow.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_reg.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_rgbd.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_saliency.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_sfm.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_stereo.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_structured_light.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_surface_matching.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_tracking.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_xfeatures2d.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_ximgproc.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_xobjdetect.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_xphoto.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_highgui.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_videoio.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_shape.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_phase_unwrapping.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_dnn.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_video.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_datasets.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_ml.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_plot.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_imgcodecs.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_objdetect.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_calib3d.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_features2d.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_flann.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_photo.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_imgproc.3.4.10.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_core.3.4.10.dylib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "main",
+	"nameOnDisk" : "main",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "main.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sift.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Utils.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "EXECUTABLE"
+}
